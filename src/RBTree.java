@@ -1,23 +1,23 @@
-public class RBTree {
+public class RBTree{
 
-    public class Node {
-        public Node parent;
-        public Node left;
-        public Node right;
+    public static class RBNode {
+        public RBNode p;
+        public RBNode left;
+        public RBNode right;
         public String color;
         public int key;
     }
 
-    public Node root;
-    public Node nil;
+    public RBNode root;
+    public RBNode nil;
 
-    public Node search(int key) {
-        Node dummy = this.root;
+    public RBNode search(int key) {
+        RBNode dummy = this.root;
 
-        while(dummy != this.nil && dummy.key != key){
-            if(key > dummy.key){
+        while (dummy != this.nil && dummy.key != key) {
+            if (key > dummy.key) {
                 dummy = dummy.right;
-            }else{
+            } else {
                 dummy = dummy.left;
             }
         }
@@ -29,39 +29,42 @@ public class RBTree {
     }
 
 
-    public void rb_transplant(Node x, Node y){
+    public void rb_transplant(RBNode x, RBNode y) {
 
-        if(x.parent == this.nil){
+        if (x.p == this.nil) {
             this.root = y;
-        }else if(x == x.parent.left){
-            x.parent.left = y;
-        }else{
-            x.parent.right = y;
+        } else if (x == x.p.left) {
+            x.p.left = y;
+        } else {
+            x.p.right = y;
         }
 
-        y.parent = x.parent;
+        y.p = x.p;
     }
 
-    public void left_rotate(Node x){
-        Node y = x.right;
+    public void left_rotate(RBNode x) {
+        RBNode y = x.right;
         x.right = y.left;
 
-        if(y.left != this.nil){
-            y.left.parent = x;
+        if (y.left != this.nil) {
+            y.left.p = x;
         }
 
-        y.parent = x.parent;
+        y.p = x.p;
 
-        if(x.parent == this.nil){
+        if (x.p == this.nil) {
             this.root = y;
-        }else if(x.parent.left == x){
-            x.parent.left = y;
-        }else{
-            x.parent.right = y;
+        } else if (x.p.left == x) {
+            x.p.left = y;
+        } else {
+            x.p.right = y;
         }
         y.left = x;
-        x.parent = y;
+        x.p = y;
     }
 
+    public RBNode tree_minimum(){
+
+    }
 
 }
